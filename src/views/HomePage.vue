@@ -74,7 +74,7 @@
                 <ion-label class="center">MMK</ion-label>
               </ion-col>
             </ion-item>
-            <ion-card-content>
+            <ion-card-content class="ion-no-padding ion-padding-start ion-padding-end">
               <ion-grid>
                 <ion-row>
                   <ion-col>
@@ -155,11 +155,11 @@ import {
   IonItem,
   IonIcon,
   IonSearchbar,
-    IonModal,
-    IonButtons,
-    IonButton,
-    IonFab,
-    IonFabButton
+  IonModal,
+  IonButtons,
+  IonButton,
+  IonFab,
+  IonFabButton
 } from '@ionic/vue';
 import {arrowForward, heart, heartCircle} from "ionicons/icons";
 import {Swiper, SwiperSlide} from 'swiper/vue';
