@@ -1,0 +1,16 @@
+/* For information on how to create your own theme, please see:
+http://ionicframework.com/docs/theming/ */
+
+.center {
+    text-align: center;
+    margin: auto;
+    padding: 2px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.full-width {
+    width: 100%;
+}
