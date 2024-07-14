@@ -5,26 +5,66 @@
         <ion-title>Account</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
-      <ion-button @click="signInWithGoogle">Google</ion-button>
-      {{ signInInfo }}
+    <ion-content class="ion-padding center">
+      <ion-button v-if="!email" @click="signInWithGoogle" color="dark">
+        <ion-icon :icon="logoGoogle" size="large"></ion-icon>
+        <span class="ion-padding-start">Sign in with Google</span>
+      </ion-button>
+      <div class="ion-padding">{{ email }}</div>
+      <ion-button v-if="email" @click="logout" color="dark">Logout</ion-button>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController } from '@ionic/vue';
 import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 import {onMounted, ref} from "vue";
+import useFirebase from "@/hooks/useFirebase";
+import {logoGoogle} from "ionicons/icons";
+import RegisterModal from "@/views/Modal/RegisterModal.vue";
 
-const signInInfo = ref('');
+const {getUser} = useFirebase();
+const email = ref(localStorage.getItem('loginEmail'));
 
 const signInWithGoogle = async () => {
   const response = await GoogleAuth.signIn();
-  signInInfo.value = JSON.stringify(response);
+  if(response.email){
+    getUser(response.email.replace('.','')).then((res) => {
+      if(res.data){
+        email.value = response.email;
+        localStorage.setItem('loginEmail', response.email);
+      }else{
+        openRegisterModal(response.email);
+      }
+    });
+  }
+};
+
+const logout = () => {
+  localStorage.removeItem('loginEmail');
+  email.value = '';
+}
+
+const openRegisterModal = async (registerEmail: string) => {
+  const modal = await modalController.create({
+    component: RegisterModal,
+    componentProps: {
+      'registerEmail': registerEmail
+    }
+  });
+
+  modal.present();
+
+  const { data, role } = await modal.onWillDismiss();
+
+  if (role === 'confirm') {
+    email.value = data;
+  }
 };
 
 onMounted(() => {
   GoogleAuth.initialize();
 });
+
 </script>

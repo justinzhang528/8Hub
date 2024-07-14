@@ -23,6 +23,7 @@
     "@codetrix-studio/capacitor-google-auth": "^3.3.6",
     "@ionic/vue": "^8.0.0",
     "@ionic/vue-router": "^8.0.0",
+    "firebase": "^10.12.3",
     "flag-icons": "^7.2.3",
     "ionicons": "^7.0.0",
     "swiper": "^11.1.4",
