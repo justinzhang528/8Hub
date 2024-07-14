@@ -4,3 +4,4 @@ android/*
 dist/*
 ios/*
 .DS_Store
+.idea/*

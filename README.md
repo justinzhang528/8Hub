@@ -79,6 +79,9 @@
   chmod -R 777 PROJECT_DIR
   ```
 
+### Capacitor-google-auth:
+- https://github.com/CodetrixStudio/CapacitorGoogleAuth
+
 ### Admob:
 - For android:
   - https://developers.google.com/admob/android/quick-start

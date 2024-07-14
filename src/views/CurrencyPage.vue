@@ -140,7 +140,7 @@ import {ref, watch} from "vue";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import {arrowForward, swapVertical} from "ionicons/icons";
 
-const segmentValue = ref('converter');
+const segmentValue = ref('rate');
 const currencies = [
   {name: 'USD', flag: 'fi fi-us', exchangeRate: 1},
   {name: 'MMK', flag: 'fi fi-mm', exchangeRate: 4560},
