@@ -23,6 +23,7 @@ import {onMounted, ref} from "vue";
 import useFirebase from "@/hooks/useFirebase";
 import {logoGoogle} from "ionicons/icons";
 import RegisterModal from "@/views/Modal/RegisterModal.vue";
+import {showLoading} from "@/hooks/useUtils";
 
 const {getUser} = useFirebase();
 const email = ref(localStorage.getItem('loginEmail'));
@@ -32,8 +33,10 @@ const signInWithGoogle = async () => {
   if(response.email){
     getUser(response.email.replace('.','')).then((res) => {
       if(res.data){
-        email.value = response.email;
-        localStorage.setItem('loginEmail', response.email);
+        showLoading('Please Wait...',()=>{
+          email.value = response.email;
+          localStorage.setItem('loginEmail', response.email);
+        }, 750);
       }else{
         openRegisterModal(response.email);
       }
@@ -42,6 +45,7 @@ const signInWithGoogle = async () => {
 };
 
 const logout = () => {
+  GoogleAuth.signOut();
   localStorage.removeItem('loginEmail');
   email.value = '';
 }
@@ -62,6 +66,7 @@ const openRegisterModal = async (registerEmail: string) => {
     email.value = data;
   }
 };
+
 
 onMounted(() => {
   GoogleAuth.initialize();

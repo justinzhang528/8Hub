@@ -8,7 +8,7 @@ const config: CapacitorConfig = {
     GoogleAuth: {
       scopes: ['profile', 'email'],
       iosClientId: '824874175174-8h68102ccb784s3dlqmquj4qdif3f647.apps.googleusercontent.com',
-      androidClientId: '824874175174-2cvaf9uup283iaeou0059e21dgdflup3.apps.googleusercontent.com',
+      androidClientId: '824874175174-a8f9k0sl1rg8tqc84dn6dscjf4njmscm.apps.googleusercontent.com', // use web application id for android
       forceCodeForRefreshToken: true,
     },
   },
